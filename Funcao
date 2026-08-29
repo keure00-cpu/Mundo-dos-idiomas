@@ -1,0 +1,45 @@
+async function comprar(plano) {
+
+  const botao = event.target;
+
+  botao.innerHTML = "⏳ Carregando...";
+  botao.disabled = true;
+
+  try {
+
+    const resposta = await fetch("/api/create-payment", {
+      method: "POST",
+
+      headers: {
+        "Content-Type": "application/json"
+      },
+
+      body: JSON.stringify({
+        plano: plano
+      })
+    });
+
+    const dados = await resposta.json();
+
+    if (!resposta.ok) {
+      throw new Error(
+        dados.error || "Erro ao criar pagamento"
+      );
+    }
+
+    // Abre o Checkout do Mercado Pago
+    window.location.href = dados.init_point;
+
+  } catch (erro) {
+
+    alert(
+      "Não foi possível iniciar o pagamento: "
+      + erro.message
+    );
+
+    botao.innerHTML = "🛒 Comprar Agora";
+    botao.disabled = false;
+
+  }
+
+}
