@@ -1,0 +1,1126 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta
+name="viewport"
+content="width=device-width,initial-scale=1">
+
+<title>Mundo dos Idiomas</title>
+
+<style>
+
+:root{
+--bg:#07111f;
+--card:#101f31;
+--primary:#7c5cff;
+--text:#fff;
+--muted:#aab6c7;
+--border:rgba(255,255,255,.1);
+}
+
+*{
+box-sizing:border-box;
+}
+
+body{
+margin:0;
+font-family:Arial,sans-serif;
+background:var(--bg);
+color:var(--text);
+}
+
+header{
+position:sticky;
+top:0;
+z-index:10;
+background:#07111f;
+border-bottom:1px solid var(--border);
+}
+
+nav,.container{
+max-width:1150px;
+margin:auto;
+padding:18px 20px;
+}
+
+nav{
+display:flex;
+justify-content:space-between;
+align-items:center;
+}
+
+button,input{
+font:inherit;
+}
+
+button{
+border:0;
+padding:12px 18px;
+border-radius:12px;
+cursor:pointer;
+font-weight:bold;
+}
+
+.primary{
+background:linear-gradient(
+135deg,
+#7c5cff,
+#a78bfa
+);
+color:white;
+}
+
+.secondary{
+background:var(--card);
+color:white;
+border:1px solid var(--border);
+}
+
+.hero{
+text-align:center;
+padding:100px 20px;
+background:
+radial-gradient(
+circle at top,
+#7c5cff55,
+transparent 55%
+);
+}
+
+.hero h1{
+font-size:clamp(
+45px,
+8vw,
+80px
+);
+}
+
+.grid{
+display:grid;
+grid-template-columns:
+repeat(
+auto-fit,
+minmax(230px,1fr)
+);
+gap:18px;
+}
+
+.card{
+background:var(--card);
+border:1px solid var(--border);
+padding:22px;
+border-radius:20px;
+}
+
+.hidden{
+display:none!important;
+}
+
+.popular{
+border:2px solid var(--primary);
+}
+
+.stat{
+font-size:32px;
+font-weight:bold;
+}
+
+.lesson{
+width:100%;
+margin:8px 0;
+background:#ffffff0d;
+color:white;
+text-align:left;
+}
+
+.player{
+height:320px;
+background:#000;
+border-radius:20px;
+display:flex;
+align-items:center;
+justify-content:center;
+}
+
+input{
+width:100%;
+padding:13px;
+margin:8px 0;
+background:#07111f;
+color:white;
+border:1px solid var(--border);
+border-radius:10px;
+}
+
+.modal{
+position:fixed;
+inset:0;
+background:#000b;
+display:none;
+align-items:center;
+justify-content:center;
+padding:20px;
+z-index:100;
+}
+
+.modal.show{
+display:flex;
+}
+
+.modal .card{
+width:min(400px,100%);
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+<header>
+
+<nav>
+
+<b>🌎 Mundo dos Idiomas</b>
+
+<div id="guest">
+
+<button
+class="secondary"
+onclick="openLogin()">
+
+Entrar
+
+</button>
+
+<button
+class="primary"
+onclick="openRegister()">
+
+Criar conta
+
+</button>
+
+</div>
+
+
+<div
+id="logged"
+class="hidden">
+
+<span id="userName"></span>
+
+<button
+class="secondary"
+onclick="logout()">
+
+Sair
+
+</button>
+
+</div>
+
+</nav>
+
+</header>
+
+
+<main id="home">
+
+
+<section class="hero">
+
+<h1>
+Aprenda idiomas<br>
+do mundo inteiro.
+</h1>
+
+<p>
+Estude idiomas com aulas,
+quizzes, XP e certificados.
+</p>
+
+<button
+class="primary"
+onclick="scrollToPlans()">
+
+Ver planos
+
+</button>
+
+</section>
+
+
+<section
+id="plans"
+class="container">
+
+<h1>
+💳 Escolha seu plano
+</h1>
+
+
+<div class="grid">
+
+
+<div class="card">
+
+<h2>🥉 Básico</h2>
+
+<h1>R$ 29,90</h1>
+
+<p>
+✓ 3 idiomas<br>
+✓ Aulas básicas<br>
+✓ Quiz
+</p>
+
+<button
+class="primary"
+onclick="buy('basic')">
+
+🛒 Comprar Agora
+
+</button>
+
+</div>
+
+
+<div class="card popular">
+
+<h2>
+⭐ Premium
+</h2>
+
+<h1>
+R$ 59,90
+</h1>
+
+<p>
+✓ Todos os idiomas<br>
+✓ Todas as aulas<br>
+✓ Quiz<br>
+✓ Certificado
+</p>
+
+<button
+class="primary"
+onclick="buy('premium')">
+
+🛒 Comprar Agora
+
+</button>
+
+</div>
+
+
+<div class="card">
+
+<h2>
+👑 Vitalício
+</h2>
+
+<h1>
+R$ 99,90
+</h1>
+
+<p>
+✓ Tudo liberado<br>
+✓ Certificado<br>
+✓ Acesso vitalício
+</p>
+
+<button
+class="primary"
+onclick="buy('lifetime')">
+
+🛒 Comprar Agora
+
+</button>
+
+</div>
+
+
+</div>
+
+</section>
+
+
+<section class="container">
+
+<h1>
+📚 Idiomas
+</h1>
+
+<div
+id="languages"
+class="grid">
+
+</div>
+
+</section>
+
+</main>
+
+
+<main
+id="student"
+class="container hidden">
+
+<button
+class="secondary"
+onclick="goHome()">
+
+← Início
+
+</button>
+
+
+<h1
+id="courseTitle">
+
+Curso
+
+</h1>
+
+
+<div class="grid">
+
+<div class="card">
+
+XP
+
+<div
+id="xp"
+class="stat">
+
+0
+
+</div>
+
+</div>
+
+
+<div class="card">
+
+Progresso
+
+<div
+id="progress">
+
+0%
+
+</div>
+
+</div>
+
+
+<div class="card">
+
+Plano
+
+<div
+id="planName">
+
+Free
+
+</div>
+
+</div>
+
+</div>
+
+
+<br>
+
+
+<div class="card">
+
+<div
+id="player"
+class="player">
+
+▶ Escolha uma aula
+
+</div>
+
+<h2
+id="lessonTitle">
+
+Bem-vindo
+
+</h2>
+
+</div>
+
+
+<br>
+
+
+<div class="card">
+
+<h2>
+📖 Aulas
+</h2>
+
+<div
+id="lessonList">
+
+</div>
+
+</div>
+
+
+<br>
+
+
+<div class="card">
+
+<h2>
+🧠 Quiz
+</h2>
+
+<p>
+Como se diz
+"Olá" em inglês?
+</p>
+
+<button
+class="secondary"
+onclick="quiz('hello')">
+
+Hello
+
+</button>
+
+<button
+class="secondary"
+onclick="quiz('bye')">
+
+Bye
+
+</button>
+
+<p id="quizResult"></p>
+
+</div>
+
+</main>
+
+
+<div
+id="modal"
+class="modal">
+
+<div class="card">
+
+<h2
+id="modalTitle">
+
+Entrar
+
+</h2>
+
+<input
+id="name"
+placeholder="Nome">
+
+<input
+id="email"
+type="email"
+placeholder="E-mail">
+
+<input
+id="password"
+type="password"
+placeholder="Senha">
+
+<button
+class="primary"
+onclick="submitAuth()">
+
+Continuar
+
+</button>
+
+<button
+class="secondary"
+onclick="closeModal()">
+
+Cancelar
+
+</button>
+
+<p id="message"></p>
+
+</div>
+
+</div>
+
+
+<script
+src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2">
+
+</script>
+
+<script src="config.js"></script>
+
+
+<script>
+
+const supabase =
+window.supabase.createClient(
+SUPABASE_URL,
+SUPABASE_PUBLISHABLE_KEY
+);
+
+
+const idiomas=[
+
+["🇺🇸","Inglês"],
+["🇪🇸","Espanhol"],
+["🇫🇷","Francês"],
+["🇮🇹","Italiano"],
+["🇩🇪","Alemão"],
+["🇯🇵","Japonês"],
+["🇨🇳","Mandarim"],
+["🇰🇷","Coreano"],
+["🇷🇺","Russo"],
+["🇸🇦","Árabe"],
+["🇮🇳","Hindi"],
+["🇧🇷","Português"]
+
+];
+
+
+const aulas=[
+
+"Alfabeto e Pronúncia",
+"Cumprimentos",
+"Apresentação Pessoal",
+"Números",
+"Família",
+"Viagem",
+"Compras",
+"Conversação"
+
+];
+
+
+let currentUser=null;
+
+let currentLanguage="";
+
+let authMode="login";
+
+
+idiomas.forEach(item=>{
+
+const card=document.createElement("div");
+
+card.className="card";
+
+card.innerHTML=`
+
+<h1>${item[0]}</h1>
+
+<h2>${item[1]}</h2>
+
+<button
+class="primary">
+
+Estudar
+
+</button>
+
+`;
+
+card.onclick=
+()=>openCourse(item[1]);
+
+languages.appendChild(card);
+
+});
+
+
+function openLogin(){
+
+authMode="login";
+
+modalTitle.innerText="Entrar";
+
+modal.classList.add("show");
+
+}
+
+
+function openRegister(){
+
+authMode="register";
+
+modalTitle.innerText=
+"Criar conta";
+
+modal.classList.add("show");
+
+}
+
+
+function closeModal(){
+
+modal.classList.remove("show");
+
+}
+
+
+async function submitAuth(){
+
+const emailValue=email.value;
+
+const passwordValue=password.value;
+
+const nameValue=name.value;
+
+
+let result;
+
+
+if(authMode==="register"){
+
+result=
+await supabase.auth.signUp({
+
+email:emailValue,
+
+password:passwordValue,
+
+options:{
+
+data:{
+
+full_name:nameValue
+
+}
+
+}
+
+});
+
+}else{
+
+result=
+await supabase.auth
+.signInWithPassword({
+
+email:emailValue,
+
+password:passwordValue
+
+});
+
+}
+
+
+if(result.error){
+
+message.innerText=
+result.error.message;
+
+return;
+
+}
+
+
+message.innerText=
+"Sucesso!";
+
+
+if(result.data.user){
+
+currentUser=
+result.data.user;
+
+await loadUser();
+
+closeModal();
+
+}
+
+}
+
+
+async function loadUser(){
+
+const {
+data:{user}
+}=
+await supabase.auth.getUser();
+
+
+currentUser=user;
+
+
+if(!user){
+
+guest.classList.remove("hidden");
+
+logged.classList.add("hidden");
+
+return;
+
+}
+
+
+guest.classList.add("hidden");
+
+logged.classList.remove("hidden");
+
+
+userName.innerText=
+"👤 "+
+(
+user.user_metadata.full_name
+||
+user.email
+);
+
+
+const {data}=
+
+await supabase
+.from("profiles")
+.select("*")
+.eq("id",user.id)
+.maybeSingle();
+
+
+if(!data){
+
+await supabase
+.from("profiles")
+.insert({
+
+id:user.id,
+
+full_name:
+user.user_metadata.full_name
+||
+"Aluno"
+
+});
+
+}
+
+}
+
+
+async function logout(){
+
+await supabase.auth.signOut();
+
+currentUser=null;
+
+guest.classList.remove("hidden");
+
+logged.classList.add("hidden");
+
+goHome();
+
+}
+
+
+async function buy(plan){
+
+if(!currentUser){
+
+openLogin();
+
+return;
+
+}
+
+
+const {
+data:{session}
+}=
+await supabase.auth.getSession();
+
+
+const response=
+
+await fetch(
+"/api/create-payment",
+{
+
+method:"POST",
+
+headers:{
+
+"Content-Type":
+"application/json",
+
+Authorization:
+"Bearer "+
+session.access_token
+
+},
+
+body:
+JSON.stringify({
+plan:plan
+})
+
+}
+);
+
+
+const data=
+await response.json();
+
+
+if(data.error){
+
+alert(data.error);
+
+return;
+
+}
+
+
+window.location.href=
+data.init_point;
+
+}
+
+
+async function openCourse(language){
+
+if(!currentUser){
+
+openLogin();
+
+return;
+
+}
+
+
+currentLanguage=language;
+
+
+home.classList.add("hidden");
+
+student.classList.remove("hidden");
+
+
+courseTitle.innerText=
+"Curso de "+language;
+
+
+lessonList.innerHTML="";
+
+
+aulas.forEach((aula,index)=>{
+
+const button=
+document.createElement("button");
+
+
+button.className="lesson";
+
+
+button.innerText=
+"▶ Aula "+
+(index+1)+
+" — "+
+aula;
+
+
+button.onclick=
+()=>openLesson(index);
+
+
+lessonList.appendChild(button);
+
+});
+
+
+await loadProgress();
+
+}
+
+
+async function openLesson(index){
+
+lessonTitle.innerText=
+aulas[index];
+
+
+player.innerText=
+"🎬 "+aulas[index];
+
+
+const completed=
+index+1;
+
+
+const points=
+completed*20;
+
+
+await supabase
+.from("course_progress")
+.upsert({
+
+user_id:
+currentUser.id,
+
+language:
+currentLanguage,
+
+completed:
+completed,
+
+xp:
+points,
+
+updated_at:
+new Date().toISOString()
+
+},
+
+{
+onConflict:
+"user_id,language"
+}
+);
+
+
+await loadProgress();
+
+}
+
+
+async function loadProgress(){
+
+const {data}=
+
+await supabase
+.from("course_progress")
+.select("*")
+.eq(
+"user_id",
+currentUser.id
+)
+.eq(
+"language",
+currentLanguage
+)
+.maybeSingle();
+
+
+if(data){
+
+xp.innerText=
+data.xp;
+
+
+progress.innerText=
+Math.round(
+data.completed/
+aulas.length*
+100
+)+"%";
+
+}else{
+
+xp.innerText="0";
+
+progress.innerText="0%";
+
+}
+
+
+const {data:profile}=
+
+await supabase
+.from("profiles")
+.select("plan")
+.eq(
+"id",
+currentUser.id
+)
+.maybeSingle();
+
+
+planName.innerText=
+profile?.plan
+||
+"free";
+
+}
+
+
+function quiz(answer){
+
+if(answer==="hello"){
+
+quizResult.innerText=
+"✅ Correto!";
+
+}else{
+
+quizResult.innerText=
+"❌ Tente novamente.";
+
+}
+
+}
+
+
+function goHome(){
+
+student.classList.add("hidden");
+
+home.classList.remove("hidden");
+
+}
+
+
+function scrollToPlans(){
+
+plans.scrollIntoView({
+behavior:"smooth"
+});
+
+}
+
+
+supabase.auth
+.onAuthStateChange(
+(event,session)=>{
+
+if(session){
+
+currentUser=
+session.user;
+
+loadUser();
+
+}
+
+}
+);
+
+
+loadUser();
+
+</script>
+
+</body>
+
+</html>
