@@ -1,0 +1,975 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Mundo dos Idiomas V2</title>
+
+<style>
+:root{
+  --bg:#07111f;
+  --card:#101f31;
+  --card2:#162a42;
+  --primary:#7c5cff;
+  --text:#ffffff;
+  --muted:#aab6c7;
+  --border:rgba(255,255,255,.10);
+}
+
+*{
+  box-sizing:border-box;
+}
+
+html{
+  scroll-behavior:smooth;
+}
+
+body{
+  margin:0;
+  font-family:Arial,Helvetica,sans-serif;
+  background:var(--bg);
+  color:var(--text);
+}
+
+header{
+  position:sticky;
+  top:0;
+  z-index:100;
+  background:rgba(7,17,31,.95);
+  backdrop-filter:blur(15px);
+  border-bottom:1px solid var(--border);
+}
+
+nav{
+  max-width:1200px;
+  margin:auto;
+  padding:16px 20px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:15px;
+}
+
+.logo{
+  font-size:20px;
+  font-weight:bold;
+}
+
+button{
+  border:0;
+  border-radius:12px;
+  padding:12px 18px;
+  cursor:pointer;
+  font-size:15px;
+  font-weight:bold;
+  transition:.2s;
+}
+
+button:hover{
+  transform:translateY(-2px);
+}
+
+.primary{
+  background:linear-gradient(135deg,#7c5cff,#a78bfa);
+  color:white;
+}
+
+.secondary{
+  background:var(--card);
+  color:white;
+  border:1px solid var(--border);
+}
+
+.container{
+  max-width:1200px;
+  margin:auto;
+  padding:25px;
+}
+
+.hero{
+  text-align:center;
+  padding:90px 20px;
+  background:
+  radial-gradient(circle at top,
+  rgba(124,92,255,.35),
+  transparent 55%);
+}
+
+.hero h1{
+  font-size:clamp(42px,8vw,80px);
+  margin:0;
+}
+
+.hero p{
+  max-width:700px;
+  margin:25px auto;
+  font-size:18px;
+  line-height:1.6;
+  color:var(--muted);
+}
+
+.badge{
+  display:inline-block;
+  padding:10px 16px;
+  background:rgba(124,92,255,.15);
+  border:1px solid rgba(124,92,255,.3);
+  border-radius:30px;
+  margin-bottom:20px;
+}
+
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+  gap:18px;
+}
+
+.card{
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:20px;
+  padding:20px;
+  transition:.2s;
+}
+
+.card:hover{
+  transform:translateY(-4px);
+  border-color:var(--primary);
+}
+
+.flag{
+  font-size:45px;
+}
+
+.muted{
+  color:var(--muted);
+}
+
+#courseArea{
+  display:none;
+}
+
+.dashboard{
+  display:grid;
+  grid-template-columns:240px 1fr;
+  gap:20px;
+}
+
+.sidebar{
+  height:max-content;
+}
+
+.sidebar button{
+  display:block;
+  width:100%;
+  margin-top:10px;
+  text-align:left;
+}
+
+.stats{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:15px;
+}
+
+.stat-number{
+  font-size:32px;
+  font-weight:bold;
+}
+
+.lesson{
+  width:100%;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin:10px 0;
+  background:var(--card2);
+  color:white;
+  border:1px solid var(--border);
+}
+
+.video{
+  height:350px;
+  border-radius:20px;
+  background:#000;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:22px;
+  margin-bottom:20px;
+}
+
+.progressbar{
+  height:14px;
+  background:#ffffff15;
+  border-radius:20px;
+  overflow:hidden;
+}
+
+.progressfill{
+  height:100%;
+  width:0%;
+  background:linear-gradient(90deg,#7c5cff,#a78bfa);
+  transition:.4s;
+}
+
+.hidden{
+  display:none !important;
+}
+
+.quiz-option{
+  display:block;
+  width:100%;
+  margin:10px 0;
+  text-align:left;
+}
+
+.certificate{
+  text-align:center;
+  padding:60px 20px;
+}
+
+.certificate h1{
+  font-size:50px;
+}
+
+@media(max-width:800px){
+
+  .dashboard{
+    grid-template-columns:1fr;
+  }
+
+  .stats{
+    grid-template-columns:1fr;
+  }
+
+  .video{
+    height:220px;
+  }
+
+}
+</style>
+</head>
+
+<body>
+
+<header>
+
+<nav>
+
+<div class="logo">
+🌎 Mundo dos Idiomas V2
+</div>
+
+<div>
+
+<button class="secondary"
+onclick="goHome()">
+Início
+</button>
+
+<button class="primary"
+onclick="scrollCatalog()">
+Explorar
+</button>
+
+</div>
+
+</nav>
+
+</header>
+
+
+<!-- HOME -->
+
+<main id="home">
+
+<section class="hero">
+
+<div class="badge">
+🚀 Plataforma Global de Idiomas
+</div>
+
+<h1>
+Aprenda idiomas<br>
+do mundo inteiro.
+</h1>
+
+<p>
+Estude idiomas através de módulos, aulas,
+exercícios, XP, níveis, quizzes e certificados.
+</p>
+
+<button class="primary"
+onclick="scrollCatalog()">
+
+📚 Explorar Idiomas
+
+</button>
+
+</section>
+
+
+<section id="catalog"
+class="container">
+
+<h2>📚 Catálogo de Idiomas</h2>
+
+<p class="muted">
+Escolha um idioma para iniciar seus estudos.
+</p>
+
+<div id="languageGrid"
+class="grid"></div>
+
+</section>
+
+</main>
+
+
+<!-- CURSO -->
+
+<main id="courseArea"
+class="container">
+
+<div class="dashboard">
+
+<aside class="sidebar card">
+
+<h3>🎓 Área do Aluno</h3>
+
+<button class="secondary"
+onclick="showCourse()">
+
+📚 Curso
+
+</button>
+
+<button class="secondary"
+onclick="showQuiz()">
+
+🧠 Quiz
+
+</button>
+
+<button class="secondary"
+onclick="showCertificate()">
+
+🏆 Certificado
+
+</button>
+
+<button class="secondary"
+onclick="goHome()">
+
+← Voltar
+
+</button>
+
+</aside>
+
+
+<section>
+
+
+<!-- CURSO -->
+
+<div id="courseTab">
+
+<h1 id="courseTitle">
+Curso
+</h1>
+
+
+<div class="stats">
+
+<div class="card">
+
+XP
+
+<div id="xp"
+class="stat-number">
+0
+</div>
+
+</div>
+
+
+<div class="card">
+
+Progresso
+
+<div id="progressText"
+class="stat-number">
+0%
+</div>
+
+</div>
+
+
+<div class="card">
+
+Nível
+
+<div id="level"
+class="stat-number">
+1
+</div>
+
+</div>
+
+</div>
+
+
+<br>
+
+
+<div class="card">
+
+<div class="progressbar">
+
+<div id="progressFill"
+class="progressfill"></div>
+
+</div>
+
+</div>
+
+
+<br>
+
+
+<div class="card">
+
+<div id="video"
+class="video">
+
+▶ Selecione uma aula
+
+</div>
+
+<h2 id="lessonTitle">
+Bem-vindo!
+</h2>
+
+<p class="muted">
+Escolha uma aula para começar.
+</p>
+
+</div>
+
+
+<br>
+
+
+<div class="card">
+
+<h2>
+📖 Módulos e Aulas
+</h2>
+
+<div id="lessonList"></div>
+
+</div>
+
+</div>
+
+
+<!-- QUIZ -->
+
+<div id="quizTab"
+class="hidden">
+
+<div class="card">
+
+<h1>
+🧠 Quiz
+</h1>
+
+<h3>
+Como se diz "Olá" em inglês?
+</h3>
+
+<button class="quiz-option secondary"
+onclick="answerQuiz('Hello')">
+
+A) Hello
+
+</button>
+
+<button class="quiz-option secondary"
+onclick="answerQuiz('Bye')">
+
+B) Bye
+
+</button>
+
+<button class="quiz-option secondary"
+onclick="answerQuiz('Thanks')">
+
+C) Thanks
+
+</button>
+
+<p id="quizResult"></p>
+
+</div>
+
+</div>
+
+
+<!-- CERTIFICADO -->
+
+<div id="certificateTab"
+class="hidden">
+
+<div class="card certificate">
+
+<h1>
+🏆 CERTIFICADO
+</h1>
+
+<p>
+Certificamos que
+</p>
+
+<h2 id="studentName">
+Aluno
+</h2>
+
+<p>
+está estudando o curso
+</p>
+
+<h2 id="certificateCourse">
+Mundo dos Idiomas
+</h2>
+
+<br>
+
+<button class="primary"
+onclick="window.print()">
+
+🖨 Imprimir Certificado
+
+</button>
+
+</div>
+
+</div>
+
+
+</section>
+
+</div>
+
+</main>
+
+
+<script>
+
+
+const languages = [
+
+["🇺🇸","Inglês"],
+["🇪🇸","Espanhol"],
+["🇫🇷","Francês"],
+["🇮🇹","Italiano"],
+["🇩🇪","Alemão"],
+["🇯🇵","Japonês"],
+["🇨🇳","Mandarim"],
+["🇰🇷","Coreano"],
+["🇷🇺","Russo"],
+["🇸🇦","Árabe"],
+["🇮🇳","Hindi"],
+["🇧🇷","Português"],
+["🇳🇱","Holandês"],
+["🇸🇪","Sueco"],
+["🇵🇱","Polonês"],
+["🇬🇷","Grego"],
+["🏛️","Latim"]
+
+];
+
+
+const lessons = [
+
+"Alfabeto e Pronúncia",
+"Cumprimentos",
+"Apresentação Pessoal",
+"Números e Datas",
+"Família e Cotidiano",
+"Viagem e Transporte",
+"Restaurante e Compras",
+"Conversação Básica"
+
+];
+
+
+let currentLanguage = "";
+
+let completed = 0;
+
+let xp = 0;
+
+
+/* CATÁLOGO */
+
+const grid =
+document.getElementById("languageGrid");
+
+
+languages.forEach(language => {
+
+const card =
+document.createElement("div");
+
+card.className = "card";
+
+card.innerHTML = `
+
+<div class="flag">
+
+${language[0]}
+
+</div>
+
+<h3>
+${language[1]}
+</h3>
+
+<p class="muted">
+
+Curso completo
+
+</p>
+
+<button class="primary">
+
+Iniciar Curso
+
+</button>
+
+`;
+
+
+card.onclick = () => {
+
+openCourse(language[1]);
+
+};
+
+
+grid.appendChild(card);
+
+});
+
+
+/* ABRIR CURSO */
+
+function openCourse(language){
+
+currentLanguage = language;
+
+completed = 0;
+
+xp = 0;
+
+
+document.getElementById("home")
+.style.display = "none";
+
+
+document.getElementById("courseArea")
+.style.display = "block";
+
+
+document.getElementById("courseTitle")
+.innerText =
+"Curso de " + language;
+
+
+document.getElementById("certificateCourse")
+.innerText =
+"Curso de " + language;
+
+
+document.getElementById("lessonList")
+.innerHTML = "";
+
+
+lessons.forEach((lesson,index)=>{
+
+const button =
+document.createElement("button");
+
+button.className = "lesson";
+
+button.innerHTML = `
+
+<span>
+
+▶ Aula ${index+1} —
+${lesson}
+
+</span>
+
+<span>
+
+Estudar
+
+</span>
+
+`;
+
+
+button.onclick = () => {
+
+openLesson(index);
+
+};
+
+
+document.getElementById("lessonList")
+.appendChild(button);
+
+});
+
+
+updateProgress();
+
+showCourse();
+
+}
+
+
+/* AULA */
+
+function openLesson(index){
+
+document.getElementById("lessonTitle")
+.innerText =
+lessons[index];
+
+
+document.getElementById("video")
+.innerHTML = `
+
+🎬 Videoaula
+
+<br><br>
+
+Aula ${index+1}
+
+`;
+
+
+completed =
+Math.max(completed,index+1);
+
+
+xp =
+completed * 20;
+
+
+updateProgress();
+
+saveProgress();
+
+}
+
+
+/* PROGRESSO */
+
+function updateProgress(){
+
+const percent =
+Math.round(
+completed / lessons.length * 100
+);
+
+
+document.getElementById("progressText")
+.innerText =
+percent + "%";
+
+
+document.getElementById("progressFill")
+.style.width =
+percent + "%";
+
+
+document.getElementById("xp")
+.innerText =
+xp;
+
+
+document.getElementById("level")
+.innerText =
+Math.floor(xp / 100) + 1;
+
+}
+
+
+/* LOCAL STORAGE */
+
+function saveProgress(){
+
+const data = {
+
+language:currentLanguage,
+
+completed:completed,
+
+xp:xp
+
+};
+
+
+localStorage.setItem(
+"mundoIdiomasProgress",
+JSON.stringify(data)
+);
+
+}
+
+
+/* QUIZ */
+
+function answerQuiz(answer){
+
+const result =
+document.getElementById("quizResult");
+
+
+if(answer === "Hello"){
+
+result.innerHTML =
+"✅ Correto! Você ganhou XP.";
+
+xp += 20;
+
+updateProgress();
+
+}else{
+
+result.innerHTML =
+"❌ Resposta incorreta. Tente novamente.";
+
+}
+
+}
+
+
+/* ABAS */
+
+function showCourse(){
+
+hideTabs();
+
+document.getElementById("courseTab")
+.classList.remove("hidden");
+
+}
+
+
+function showQuiz(){
+
+hideTabs();
+
+document.getElementById("quizTab")
+.classList.remove("hidden");
+
+}
+
+
+function showCertificate(){
+
+hideTabs();
+
+document.getElementById("certificateTab")
+.classList.remove("hidden");
+
+}
+
+
+function hideTabs(){
+
+document.getElementById("courseTab")
+.classList.add("hidden");
+
+
+document.getElementById("quizTab")
+.classList.add("hidden");
+
+
+document.getElementById("certificateTab")
+.classList.add("hidden");
+
+}
+
+
+/* HOME */
+
+function goHome(){
+
+document.getElementById("courseArea")
+.style.display =
+"none";
+
+
+document.getElementById("home")
+.style.display =
+"block";
+
+}
+
+
+function scrollCatalog(){
+
+document.getElementById("catalog")
+.scrollIntoView({
+
+behavior:"smooth"
+
+});
+
+}
+
+
+/* NOME DO ALUNO */
+
+let name =
+localStorage.getItem(
+"mundoIdiomasName"
+);
+
+
+if(!name){
+
+name =
+prompt(
+"Qual é o seu nome?"
+);
+
+if(name){
+
+localStorage.setItem(
+"mundoIdiomasName",
+name
+);
+
+}
+
+}
+
+
+document.getElementById("studentName")
+.innerText =
+name || "Aluno";
+
+
+</script>
+
+</body>
+</html>
