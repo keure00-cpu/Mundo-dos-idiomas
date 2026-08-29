@@ -1,0 +1,10 @@
+{
+  "name": "mundo-dos-idiomas",
+  "version": "4.0.0",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "@supabase/supabase-js": "2.57.0",
+    "mercadopago": "2.9.0"
+  }
+}
