@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Mundo dos Idiomas | Aprenda idiomas</title>
+
+<style>
+:root{
+  --bg:#07111f;
+  --card:#101f31;
+  --primary:#7c5cff;
+  --text:#fff;
+  --muted:#aab6c7;
+  --border:rgba(255,255,255,.1);
+}
+*{box-sizing:border-box}
+body{
+  margin:0;font-family:Arial,sans-serif;
+  background:var(--bg);color:var(--text)
+}
+header{
+  position:sticky;top:0;z-index:10;
+  background:#07111fee;border-bottom:1px solid var(--border)
+}
+nav,.container{
+  max-width:1150px;margin:auto;padding:16px 20px
+}
+nav{
+  display:flex;align-items:center;
+  justify-content:space-between;gap:15px
+}
+.logo{font-size:20px;font-weight:bold}
+button{
+  border:0;border-radius:12px;padding:12px 17px;
+  font-weight:bold;cursor:pointer
+}
+.primary{
+  background:linear-gradient(135deg,#7c5cff,#a78bfa);
+  color:#fff
+}
+.secondary{
+  background:var(--card);color:#fff;border:1px solid var(--border)
+}
+.hero{
+  text-align:center;padding:90px 20px;
+  background:radial-gradient
